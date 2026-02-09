@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+    --font-FOTMatisseProEB: 'FOTMatisseProEB', sans-serif;
+    --font-sans: 'LXGWenKaiMono-Medium', sans-serif;
+}
