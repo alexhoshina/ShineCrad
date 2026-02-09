@@ -1,0 +1,90 @@
+.card {
+  /* ==================== 卡片基础尺寸 ==================== */
+  --card-aspect-ratio: 2.5 / 3.5;
+  --card-border-radius: 25px;
+  --card-perspective: 800px;
+
+  /* ==================== 鼠标位置变量 ==================== */
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+
+  /* ==================== 旋转角度变量 ==================== */
+  --rx: 0deg;
+  --ry: 0deg;
+
+  /* ==================== 视觉效果变量 ==================== */
+  --layer-opacity: 0;
+  --intensity: 0;
+  --layer-spread: 0;
+  --shadow-x: 5px;
+  --shadow-y: 5px;
+
+  /* ==================== 动态渐变角度 ==================== */
+  --gradient-angle-dynamic: calc(90deg + var(--ry) * 0.5);
+  --gradient-angle-dynamic-steep: calc(
+    45deg + var(--rx) * 0.5 + var(--ry) * 0.5
+  );
+
+  /* ==================== 卡片容器样式 ==================== */
+  width: var(--card-width);
+  aspect-ratio: var(--card-aspect-ratio);
+  position: relative;
+  z-index: 10;
+  perspective: var(--card-perspective);
+  touch-action: none;
+  user-select: none;
+}
+
+.card__rotator {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  border-radius: var(--card-border-radius);
+  transform: rotateY(var(--ry)) rotateX(var(--rx));
+  box-shadow: var(--shadow-x) var(--shadow-y)
+    calc(10px + var(--intensity) * 20px) calc(-5px + var(--intensity) * 5px)
+    rgba(0, 0, 0, 0.5);
+}
+
+/* 交互时优化渲染性能 */
+.card.card--interacting .card__rotator {
+  will-change: transform;
+}
+
+.card__layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  transform: translateZ(calc(var(--layer-depth) * var(--layer-spread)));
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+.card__shine,
+.card__glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: var(--layer-opacity);
+  will-change: opacity, background-position;
+  pointer-events: none;
+}
+
+.card__shine {
+  z-index: 4;
+  mix-blend-mode: color-dodge;
+}
+
+.card__glare {
+  z-index: 5;
+  mix-blend-mode: overlay;
+}
