@@ -56,6 +56,8 @@ interface ShineCardProps {
   layers: ParallaxLayer[]
   /** 卡片宽度 */
   width?: string
+  /** 外部强制交互状态（用于编辑器预览） */
+  forceInteracting?: boolean
 }
 
 const props = withDefaults(defineProps<ShineCardProps>(), {
@@ -117,7 +119,10 @@ const { processMaskForImage, getLayerMaskStyle, hydrateExistingImages, pendingMa
 const { setInteractingState, setIdleState, playEntranceAnimation } = useCardAnimation(cardElement)
 
 // 手势与交互
-const { isInteracting } = useCardGesture(cardElement)
+const { isInteracting: gestureInteracting } = useCardGesture(cardElement)
+
+/** 综合交互状态：手势交互 或 外部强制激活 */
+const isInteracting = computed(() => gestureInteracting.value || props.forceInteracting)
 
 // 动态样式注入
 useCardDynamicStyle({

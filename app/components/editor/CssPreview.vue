@@ -28,7 +28,7 @@ function effectToCSS(effect: EffectConfig | undefined): CSSProperties {
     backgroundRepeat: bgRepeats.join(", "),
     filter: effect.filter,
     mixBlendMode: effect.mixBlendMode as CSSProperties["mixBlendMode"],
-    opacity: effect.opacity,
+    "--effect-opacity": effect.opacity,
   };
 }
 

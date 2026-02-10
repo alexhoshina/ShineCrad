@@ -63,6 +63,8 @@
       "invalid_scheme": "方案数据无效",
       "unknown": "导入失败"
     },
+    "forceInteracting": "强制交互状态（预览效果）",
+    "disableInteracting": "关闭强制交互",
     "previewLoading": "正在加载预览...",
     "cssPreview": "CSS 预览",
     "cssPreviewEmpty": "该图层未配置任何效果",

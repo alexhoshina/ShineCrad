@@ -6,6 +6,7 @@ const {
   schemeNameEditing,
   schemeNameDraft,
   schemeDeleteDisabled,
+  forceInteracting,
   canUndo,
   canRedo,
   schemeDropdownItems,
@@ -65,6 +66,25 @@ const {
         variant="ghost"
         size="xs"
         @click="startRenameScheme(activeSchemeId)"
+      />
+    </UTooltip>
+
+    <USeparator orientation="vertical" class="h-5" />
+
+    <!-- Force Interacting Toggle -->
+    <UTooltip
+      :text="
+        forceInteracting
+          ? $t('editor.disableInteracting')
+          : $t('editor.forceInteracting')
+      "
+    >
+      <UButton
+        :icon="forceInteracting ? 'i-lucide-hand' : 'i-lucide-hand'"
+        :color="forceInteracting ? 'primary' : 'neutral'"
+        :variant="forceInteracting ? 'solid' : 'ghost'"
+        size="xs"
+        @click="forceInteracting = !forceInteracting"
       />
     </UTooltip>
 

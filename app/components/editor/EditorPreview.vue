@@ -3,6 +3,7 @@ const {
   computedLayers,
   cardWidthNumber,
   isPreviewReady,
+  forceInteracting,
   importModalOpen,
   importJsonDraft,
   onPreviewReady,
@@ -44,6 +45,7 @@ const cssPreviewOpen = ref(false);
     <ShineCard
       :layers="computedLayers"
       :width="`${cardWidthNumber}px`"
+      :force-interacting="forceInteracting"
       @ready="onPreviewReady"
     />
   </div>

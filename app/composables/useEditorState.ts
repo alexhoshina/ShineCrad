@@ -74,6 +74,7 @@ export function useEditorState() {
   const importModalOpen = ref(false);
   const importJsonDraft = ref("");
   const isPreviewReady = ref(true);
+  const forceInteracting = ref(false);
 
   // 方案快捷键
 
@@ -361,6 +362,7 @@ export function useEditorState() {
     importModalOpen,
     importJsonDraft,
     isPreviewReady,
+    forceInteracting,
 
     // 派生状态
     layers,

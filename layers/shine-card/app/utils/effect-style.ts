@@ -31,7 +31,7 @@ export function parseEffectToCSS(
       backgroundRepeat: bgRepeats.join(", "),
       filter: effect.filter,
       mixBlendMode: effect.mixBlendMode as CSSProperties["mixBlendMode"],
-      opacity: effect.opacity,
+      "--effect-opacity": effect.opacity,
     };
   } catch (error) {
     console.error("[ShineCard] Error parsing effect CSS:", error);

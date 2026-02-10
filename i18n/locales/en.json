@@ -63,6 +63,8 @@
       "invalid_scheme": "Invalid scheme data",
       "unknown": "Import failed"
     },
+    "forceInteracting": "Force Interactive (Preview Effects)",
+    "disableInteracting": "Disable Forced Interactive",
     "previewLoading": "Loading preview...",
     "cssPreview": "CSS Preview",
     "cssPreviewEmpty": "No effects configured for this layer",

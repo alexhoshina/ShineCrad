@@ -74,7 +74,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  opacity: var(--layer-opacity);
+  opacity: calc(var(--layer-opacity) * var(--effect-opacity, 1));
   will-change: opacity, background-position;
   pointer-events: none;
 }
