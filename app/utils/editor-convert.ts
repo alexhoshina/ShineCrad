@@ -3,7 +3,10 @@
  *
  * 在 editor.vue 和 index.vue 中共享使用，避免重复代码。
  */
-import type { BackgroundSource, EffectConfig } from "#layers/shine-card/app/utils/shine-card-types";
+import type {
+  BackgroundSource,
+  EffectConfig,
+} from "#layers/shine-card/app/utils/shine-card-types";
 import type {
   PosAxisConfig,
   EditorGradientSource,

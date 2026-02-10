@@ -8,7 +8,7 @@ import type {
   SizeMode,
   EditorGradientSource,
   EditorLayerEffect,
-} from '~/utils/editor-types'
+} from "~/utils/editor-types";
 
 type SourceType = EditorGradientSource["sourceType"];
 
