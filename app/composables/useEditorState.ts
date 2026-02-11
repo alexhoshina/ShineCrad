@@ -54,6 +54,7 @@ export function useEditorState() {
     importScheme,
     addSharedEffect,
     removeSharedEffect,
+    isStorageReady,
   } = useCardSchemes();
 
   // 历史记录 (撤销 / 重做)
@@ -345,6 +346,7 @@ export function useEditorState() {
   return {
     // 存储与历史
     store,
+    isStorageReady,
     schemes,
     activeSchemeId,
     activeScheme,

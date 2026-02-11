@@ -7,7 +7,7 @@ import {
 } from "~/utils/editor-convert";
 
 const { t } = useI18n();
-const { defaultScheme } = useCardSchemes();
+const { defaultScheme, isStorageReady } = useCardSchemes();
 
 // 加载状态
 
@@ -42,10 +42,11 @@ useSeoMeta({
 
 <template>
   <div class="flex items-center justify-center h-full p-4 lg:p-8">
-    <AppLoading :show="!isCardReady" />
+    <AppLoading :show="!isCardReady || !isStorageReady" />
 
     <!-- 卡片展示 -->
     <ShineCard
+      v-if="isStorageReady"
       :layers="computedLayers"
       :width="'min(calc(100vw - 6rem), calc((100vh - 12rem) * 2.5 / 3.5))'"
       @ready="onCardReady"
