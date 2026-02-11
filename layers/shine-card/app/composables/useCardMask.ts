@@ -9,57 +9,7 @@ import type { ParallaxLayer } from "../utils/shine-card-types";
  * 通过 Canvas drawImage → toDataURL('image/png') 生成同源 data: URL。
  */
 export function useCardMask() {
-  const maskDataUrls = reactive(new Map<string, string>());
   const pendingMaskCount = ref(0);
-
-  /**
-   * 从已加载的 HTMLImageElement 通过 Canvas 同步生成 Data URL
-   *
-   * @param img - 已加载的图片元素（必须以 CORS 模式加载）
-   * @param url - 该图片的原始 URL，用作缓存 key
-   */
-  function generateMaskFromImage(img: HTMLImageElement, url: string): void {
-    if (maskDataUrls.has(url)) return;
-    if (!img.naturalWidth || !img.naturalHeight) return;
-
-    const canvas = document.createElement("canvas");
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    const ctx = canvas.getContext("2d", { willReadFrequently: false });
-    if (!ctx) return;
-
-    try {
-      ctx.drawImage(img, 0, 0);
-      const dataUrl = canvas.toDataURL();
-      maskDataUrls.set(url, dataUrl);
-    } catch {
-      // Canvas 被污染（CORS 失败）时静默回退，不应用遮罩
-    }
-  }
-
-  /**
-   * 加载独立的 mask 图片（mask URL 与 img URL 不同时）
-   */
-  function loadExternalMask(url: string): void {
-    if (
-      maskDataUrls.has(url) ||
-      url.startsWith("data:") ||
-      url.startsWith("blob:")
-    )
-      return;
-
-    pendingMaskCount.value++;
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      generateMaskFromImage(img, url);
-      pendingMaskCount.value--;
-    };
-    img.onerror = () => {
-      pendingMaskCount.value--;
-    };
-    img.src = url;
-  }
 
   /**
    * 处理图片加载完成事件中的遮罩生成逻辑
@@ -67,17 +17,12 @@ export function useCardMask() {
    * @param event - img 元素的 load 事件
    * @param layer - 对应的图层数据
    */
-  function processMaskForImage(event: Event, layer: ParallaxLayer): void {
-    const img = event.target as HTMLImageElement;
+  function processMaskForImage(layer: ParallaxLayer): void {
     const maskUrl = layer.mask || layer.img;
 
     if (maskUrl && maskUrl !== "full") {
-      if (!layer.mask || layer.mask === layer.img) {
-        // mask 未设置或与 img 相同：直接从已加载的 <img> 元素生成
-        generateMaskFromImage(img, maskUrl);
-      } else {
-        // mask 是独立 URL：创建隐藏 Image 加载
-        loadExternalMask(maskUrl);
+      if (layer.mask || !(layer.mask === layer.img)) {
+        // loadExternalMask(maskUrl);
       }
     }
   }
@@ -94,11 +39,7 @@ export function useCardMask() {
     const maskUrl = layer.mask || layer.img;
     if (!maskUrl) return {};
 
-    // const resolvedUrl = maskDataUrls.get(maskUrl);
-    const resolvedUrl = maskUrl;
-    if (!resolvedUrl) return {};
-
-    const urlValue = `url('${resolvedUrl}')`;
+    const urlValue = `url('${maskUrl}')`;
     return {
       WebkitMaskImage: urlValue,
       maskImage: urlValue,
@@ -126,7 +67,7 @@ export function useCardMask() {
     layers.forEach((layer, index) => {
       const img = imgs[index];
       if (img?.complete && img.naturalWidth > 0) {
-        processMaskForImage({ target: img } as unknown as Event, layer);
+        processMaskForImage(layer);
         hydratedCount++;
       }
     });
@@ -134,7 +75,7 @@ export function useCardMask() {
   }
 
   onUnmounted(() => {
-    maskDataUrls.clear();
+
   });
 
   return {
