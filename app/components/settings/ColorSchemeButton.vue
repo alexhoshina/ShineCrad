@@ -13,7 +13,7 @@ const isDark = computed({
 
 // 使用 Cookie 持久化颜色偏好（SSR 安全）
 const primaryCookie = useCookie<string>("nuxt-ui-primary", {
-  default: () => "green",
+  default: () => "pink",
   watch: true,
 });
 const neutralCookie = useCookie<string>("nuxt-ui-neutral", {
