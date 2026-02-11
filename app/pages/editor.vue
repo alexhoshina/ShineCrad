@@ -7,6 +7,7 @@ definePageMeta({
 
 const { t } = useI18n();
 const state = useEditorState();
+const { isStorageReady } = state;
 
 provide(editorStateKey, state);
 
@@ -33,7 +34,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="h-full w-full overflow-hidden">
+  <AppLoading :show="!isStorageReady" />
+
+  <div v-if="isStorageReady" class="h-full w-full overflow-hidden">
     <!-- 桌面端：并排布局 -->
     <UDashboardGroup
       v-if="!isMobile"

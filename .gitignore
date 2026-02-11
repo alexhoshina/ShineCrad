@@ -26,3 +26,5 @@ logs
 .claude
 
 package-lock.json
+
+bun.lock

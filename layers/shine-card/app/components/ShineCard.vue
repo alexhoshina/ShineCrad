@@ -22,7 +22,7 @@
           class="card__img"
           :alt="`Card layer ${index + 1}`"
           @error="handleImageError($event, index)"
-          @load="onImageLoad($event, layer, index)"
+          @load="onImageLoad(layer, index)"
         ></img>
         <!-- 闪光层 -->
         <div
@@ -163,8 +163,8 @@ watch(isInteracting, (active) => {
 
 // ==================== 事件处理 ====================
 
-function onImageLoad(event: Event, layer: ParallaxLayer, index: number): void {
-  processMaskForImage(event, layer)
+function onImageLoad(layer: ParallaxLayer, index: number): void {
+  processMaskForImage(layer)
   loadedImageCount.value++
   emit('loaded', index)
 }

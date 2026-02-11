@@ -60,6 +60,11 @@ export function useCardSchemes() {
     store.value.activeSchemeId = store.value.schemes[0]!.id;
   }
 
+  const isStorageReady = ref(false);
+  onMounted(() => {
+    isStorageReady.value = true;
+  });
+
   // 方案增删改查
 
   const schemes = computed(() => store.value.schemes);
@@ -227,5 +232,6 @@ export function useCardSchemes() {
     resolveEditableEffect,
     addSharedEffect,
     removeSharedEffect,
+    isStorageReady,
   };
 }
