@@ -23,6 +23,10 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.89"
-  }
+    "@iconify-json/lucide": "^1.2.89",
+    "@iconify-json/simple-icons": "^1.2.70"
+  },
+  "trustedDependencies": [
+    "@parcel/watcher"
+  ]
 }
