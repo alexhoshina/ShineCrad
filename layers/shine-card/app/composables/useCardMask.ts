@@ -30,7 +30,7 @@ export function useCardMask() {
 
     try {
       ctx.drawImage(img, 0, 0);
-      const dataUrl = canvas.toDataURL("image/png");
+      const dataUrl = canvas.toDataURL();
       maskDataUrls.set(url, dataUrl);
     } catch {
       // Canvas 被污染（CORS 失败）时静默回退，不应用遮罩
@@ -94,7 +94,8 @@ export function useCardMask() {
     const maskUrl = layer.mask || layer.img;
     if (!maskUrl) return {};
 
-    const resolvedUrl = maskDataUrls.get(maskUrl);
+    // const resolvedUrl = maskDataUrls.get(maskUrl);
+    const resolvedUrl = maskUrl;
     if (!resolvedUrl) return {};
 
     const urlValue = `url('${resolvedUrl}')`;
