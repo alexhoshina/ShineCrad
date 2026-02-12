@@ -24,6 +24,7 @@ logs
 !.env.example
 
 .claude
+.agents
 
 package-lock.json
 
