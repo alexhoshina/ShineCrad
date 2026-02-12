@@ -74,7 +74,6 @@ export function useEditorState() {
   const schemeDeleteDisabled = computed(() => schemes.value.length <= 1);
   const importModalOpen = ref(false);
   const importJsonDraft = ref("");
-  const isPreviewReady = ref(true);
   const forceInteracting = ref(false);
 
   // 方案快捷键
@@ -105,25 +104,6 @@ export function useEditorState() {
       selectedLayerIndex.value = Math.max(0, l.length - 1);
     }
   });
-
-  // 预览加载状态
-
-  // 方案/图层变化时重置 ready 状态
-  watch(
-    [
-      activeSchemeId,
-      () => layers.value.map((l) => `${l.id}:${l.img}`).join(","),
-    ],
-    () => {
-      if (computedLayers.value.length > 0) {
-        isPreviewReady.value = false;
-      }
-    },
-  );
-
-  function onPreviewReady() {
-    isPreviewReady.value = true;
-  }
 
   // 方案操作
 
@@ -237,7 +217,6 @@ export function useEditorState() {
   }
 
   // 计算图层（用于 ShineCard 预览）
-
   const computedLayers = computed<ParallaxLayer[]>(() => {
     const scheme = activeScheme.value;
     if (!scheme) return [];
@@ -254,7 +233,6 @@ export function useEditorState() {
   });
 
   // 导出
-
   function exportConfig(format: ExportFormat = "ts") {
     const cardWidth = activeScheme.value?.cardWidth;
     const data = computedLayers.value;
@@ -363,7 +341,6 @@ export function useEditorState() {
     schemeDeleteDisabled,
     importModalOpen,
     importJsonDraft,
-    isPreviewReady,
     forceInteracting,
 
     // 派生状态
@@ -392,7 +369,6 @@ export function useEditorState() {
     removeLayer,
     duplicateLayer,
     toggleLayerVisibility,
-    onPreviewReady,
 
     // 效果操作
     getEffectMode,

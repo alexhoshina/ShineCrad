@@ -2,11 +2,9 @@
 const {
   computedLayers,
   cardWidthNumber,
-  isPreviewReady,
   forceInteracting,
   importModalOpen,
   importJsonDraft,
-  onPreviewReady,
   handleImport,
 } = useEditorStateInjection();
 
@@ -20,33 +18,12 @@ const cssPreviewOpen = ref(false);
   <!-- 工具栏插槽 -->
   <slot name="toolbar" />
 
-  <!-- 预览加载指示器 -->
-  <Transition name="preview-fade">
-    <div
-      v-if="!isPreviewReady"
-      class="absolute inset-0 z-30 flex items-center justify-center pointer-events-none"
-    >
-      <div
-        class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/70 dark:bg-neutral-900/70 backdrop-blur-sm border border-neutral-200/50 dark:border-neutral-700/50 shadow"
-      >
-        <UIcon
-          name="i-lucide-loader-2"
-          class="size-4 text-neutral-500 animate-spin"
-        />
-        <span class="text-xs text-neutral-500">{{
-          $t("editor.previewLoading")
-        }}</span>
-      </div>
-    </div>
-  </Transition>
-
   <!-- 卡片预览 -->
   <div class="relative z-10">
     <ShineCard
       :layers="computedLayers"
       :width="`${cardWidthNumber}px`"
       :force-interacting="forceInteracting"
-      @ready="onPreviewReady"
     />
   </div>
 
