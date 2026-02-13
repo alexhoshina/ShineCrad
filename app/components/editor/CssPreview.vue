@@ -129,7 +129,7 @@ function copyCSS() {
           color="neutral"
           variant="ghost"
           size="xs"
-          @click="$emit('isClose', true)"
+          @click="$emit('isClose')"
         />
         </UTooltip>
       </div>
