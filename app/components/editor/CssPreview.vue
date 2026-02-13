@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from "vue";
 import type { EffectConfig } from "#layers/shine-card/app/utils/shine-card-types";
+import { cs } from "@nuxt/ui/runtime/locale/index.js";
 
 const { selectedLayer, selectedLayerIndex, activeScheme } =
   useEditorStateInjection();
@@ -112,15 +113,26 @@ function copyCSS() {
           {{ $t("editor.cssPreview") }}
         </span>
       </div>
-      <UTooltip :text="$t('common.copied')">
+      <div>
+        <UTooltip :text="$t('common.copied')">
+          <UButton
+            icon="i-lucide-copy"
+            color="neutral"
+            variant="ghost"
+            size="xs"
+            @click="copyCSS"
+          />
+        </UTooltip>
+        <UTooltip :text="$t('common.close')">
         <UButton
-          icon="i-lucide-copy"
+          icon="i-lucide-x"
           color="neutral"
           variant="ghost"
           size="xs"
-          @click="copyCSS"
+          @click="$emit('isClose')"
         />
-      </UTooltip>
+        </UTooltip>
+      </div>
     </div>
     <div class="flex-1 overflow-auto p-3">
       <pre

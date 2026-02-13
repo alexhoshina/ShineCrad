@@ -21,7 +21,8 @@
     "position": "Position",
     "language": "Language",
     "delete": "Delete",
-    "poweredBy": "Powered by Nuxt & NuxtUI"
+    "poweredBy": "Powered by Nuxt & NuxtUI",
+    "close": "Close"
   },
   "theme": {
     "darkMode": "Dark Mode",

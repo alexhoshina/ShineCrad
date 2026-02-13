@@ -47,7 +47,9 @@ const cssPreviewOpen = ref(false);
       v-if="cssPreviewOpen"
       class="absolute bottom-0 left-0 right-0 z-20 h-64 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-t border-neutral-200 dark:border-neutral-700 shadow-lg"
     >
-      <CssPreview />
+      <CssPreview
+        @isClose="cssPreviewOpen = false"
+      />
     </div>
   </Transition>
 

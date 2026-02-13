@@ -21,7 +21,8 @@
     "position": "位置",
     "language": "语言",
     "delete": "删除",
-    "poweredBy": "由 Nuxt & NuxtUI 驱动"
+    "poweredBy": "由 Nuxt & NuxtUI 驱动",
+    "close": "关闭"
   },
   "theme": {
     "darkMode": "深色模式",
